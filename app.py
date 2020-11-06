@@ -34,14 +34,16 @@ def callback():
 
     return 'OK'
 
+count = 0
 
 @handler.add(MessageEvent, message = TextMessage)
 def handle_message(event):
     msg = event.message.text
     reply = '我是機器人，現在起會和您說同樣的話'
+    if msg == 'reset' :
+        count = 0 
     if count == 0 :
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply))
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = msg))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply,msg))
     if count <= 3 :
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text = msg))
     elif count <= 5 :
@@ -57,10 +59,6 @@ def handle_message(event):
     else :
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text = None))
     count += 1 
-
-count = 0
-if msg == 'reset' :
-    count = 0 
 
 if __name__ == "__main__": # 避免import時,直接執行 = main()
     app.run()
