@@ -43,7 +43,8 @@ def handle_message(event):
     if msg == 'reset' :
         count = 0 
     if count == 0 :
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply,msg))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = msg))
     if count <= 3 :
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text = msg))
     elif count <= 5 :
