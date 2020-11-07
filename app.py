@@ -45,8 +45,8 @@ def handle_message(event):
         sticker_message = StickerSendMessage(package_id='11537', sticker_id='52002734')
 
         reply_arr = [] # 回覆多則訊息
-        reply_arr.append(TextSendMessage(text = reply))
         reply_arr.append(sticker_message)
+        reply_arr.append(TextSendMessage(text = reply))
 
         line_bot_api.reply_message(event.reply_token, reply_arr)
 
