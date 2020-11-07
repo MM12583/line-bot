@@ -39,12 +39,16 @@ def callback():
 @handler.add(MessageEvent, message = TextMessage)
 def handle_message(event):
     msg = event.message.text
-    gift = Draw()
     if msg == '抽獎' :
+        gift = Draw()
         reply = '恭喜您抽中,' + str(gift.result)
         sticker_message = StickerSendMessage(package_id='11537', sticker_id='52002734')
-        line_bot_api.reply_message(event.reply_token, sticker_message)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text = reply))
+
+        reply_arr = [] # 回覆多則訊息
+        reply_arr.append(TextSendMessage(text = reply))
+        reply_arr.append(sticker_message)
+
+        line_bot_api.reply_message(event.reply_token, reply_arr)
 
 if __name__ == "__main__": # 避免import時,直接執行 = main()
     app.run()
