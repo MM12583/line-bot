@@ -1,3 +1,5 @@
 line-bot-sdk
 gunicorn
 flask
+gift
+class_Draw
